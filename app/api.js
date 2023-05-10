@@ -27,18 +27,10 @@ module.exports = function(wifi_manager, callback) {
     var app = express();
 
     // Configure the app
-    app.set("view engine", "ejs");
-    app.set("views", path.join(__dirname, "views"));
     app.set("trust proxy", true);
 
     // Setup static routes to public assets
-    app.use(express.static(path.join(__dirname, "public")));
     app.use(bodyParser.json());
-
-    // Setup HTTP routes for rendering views
-    app.get("/", function(request, response) {
-        response.render("index");
-    });
 
     // Setup HTTP routes for various APIs we wish to implement
     // the responses to these are typically JSON
@@ -64,9 +56,10 @@ module.exports = function(wifi_manager, callback) {
                 wifi_manager.enable_ap_mode(config.access_point.ssid, function(error) {
                     console.log("... AP mode reset");
                 });
-                response.redirect("/");
+                response.status(403).send({ status: "ERROR", error });
             }
             // Success! - exit
+            response.status(200).send({ status: "SUCCESS" });
             console.log("Wifi Enabled! - Exiting");
             process.exit(0);
         });
