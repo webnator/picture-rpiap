@@ -1,7 +1,7 @@
 {
   "name": "raspberry-wifi-conf",
   "version": "0.0.1",
-  "description": "Node RPI Wifi Configuration Application",
+  "description": "Node RPI Wifi Configuration Application!",
   "main": "server.js",
   "scripts": {
     "test": "npm test",
