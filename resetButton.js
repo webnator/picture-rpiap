@@ -1,26 +1,26 @@
 const rpio = require('rpio');
+const { write_template_to_file } = require('./app/wifi_manager');
+const exec = require("child_process").exec;
 
 rpio.open(10, rpio.INPUT, rpio.PULL_DOWN);
 
+
+
 function pollcb(pin) {
-  console.log('Button event on pin %d, is now %d', pin, rpio.read(pin));
-  /*
-   * Wait for a small period of time to avoid rapid changes which
-   * can't all be caught with the 1ms polling frequency.  If the
-   * pin is no longer down after the wait then ignore it.
-   */
-  rpio.sleep(5);
+  rpio.msleep(20);
 
   if (rpio.read(pin)) {
-    console.log('Pull retired');
-    return;
-  }
+    write_template_to_file(
+      "./assets/etc/wpa_supplicant/empty_wpa_supplicant.conf.template",
+      "/etc/wpa_supplicant/wpa_supplicant.conf",
+      {}, () => null);
     
-
-  console.log('Button pressed on pin P%d', pin);
+    exec('reboot');
+    process.exit(0);
+  }
 }
 
 rpio.poll(10, pollcb, rpio.POLL_BOTH);
 
 console.log('Started!');
-console.log('Pin %d, is now %d', 12, rpio.read(12));
+console.log('Pint %d, is now %d', 12, rpio.read(12));

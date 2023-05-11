@@ -26,6 +26,7 @@ function write_template_to_file(template_path, file_name, context, callback) {
 
     ], callback);
 }
+exports.write_template_to_file = write_template_to_file;
 
 /*****************************************************************************\
     Return a set of functions which we can use to manage and check our wifi
