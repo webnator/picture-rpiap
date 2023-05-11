@@ -12,7 +12,7 @@ async function resetWifi() {
     fs.writeFileSync('/etc/wpa_supplicant/wpa_supplicant.conf', file_txt);
   
     console.log('Wifi reset successfuly. Rebooting');
-    // exec('reboot now');
+    exec('reboot now');
   } catch (error) {
     console.error('Error while resetting wifi', error);
   }
