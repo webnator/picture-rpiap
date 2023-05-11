@@ -14,9 +14,7 @@ function pollcb(pin) {
     fs.writeFileSync('/etc/wpa_supplicant/wpa_supplicant.conf', file_txt);
 
     console.log('Wifi reset successfuly. Rebooting');
-    exec('reboot');
-
-    process.exit(0);
+    exec('reboot now');
   }
 }
 
