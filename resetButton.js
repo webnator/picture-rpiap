@@ -11,7 +11,7 @@ function pollcb(pin) {
     console.log('Starting reset');
     
     const file_txt = fs.readFileSync('./assets/etc/wpa_supplicant/empty_wpa_supplicant.conf.template', { encoding: 'utf8' });
-    fs.writeFileSync(file_name, file_txt);
+    fs.writeFileSync('/etc/wpa_supplicant/wpa_supplicant.conf', file_txt);
 
     console.log('Wifi reset successfuly. Rebooting');
     exec('reboot');
