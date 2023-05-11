@@ -1,5 +1,5 @@
 const rpio = require('rpio');
-const { write_template_to_file } = require('./app/wifi_manager');
+const { write_template_to_file } = require('./app/template_writer');
 const exec = require("child_process").exec;
 
 rpio.open(10, rpio.INPUT, rpio.PULL_DOWN);
