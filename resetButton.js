@@ -22,3 +22,7 @@ function pollcb(pin) {
 rpio.poll(10, pollcb, rpio.POLL_BOTH);
 
 console.log('Started!');
+
+process.on('exit', function() {
+  rpio.exit();
+});
